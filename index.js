@@ -66,6 +66,20 @@ async function run(){
 
         })
 
+        //Update Single Booking
+        app.put('/bookings/:id',async(req,res)=>{
+            const id = req.params.id;
+            const query = {_id : ObjectId(id)};
+            const updateDoc = {
+                $set: {
+                  status: "Approved"
+                },
+              };
+              const result = await bookingCollection.updateOne(query,updateDoc);
+            // console.log('updated',result);
+            res.json(result);
+        })
+
         //Delete Single User Bookings
         app.delete('/bookings/:id',async(req,res)=>{
             const id = req.params.id;
